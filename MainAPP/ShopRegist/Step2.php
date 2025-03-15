@@ -8,7 +8,7 @@ if (isset($_POST['send'])) {
     $_SESSION['ShopOwner'] = $_POST['SO'];
     $_SESSION['ShopLocation'] = $_POST['SL'];
     $_SESSION['ShopPostalCode'] = $_POST['SPC'];
-    header("location:RulesAndRegulation.php");
+    header("location:Step3.php");
     exit;
 }
 ?>
