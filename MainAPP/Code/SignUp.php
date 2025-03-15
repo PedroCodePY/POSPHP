@@ -16,7 +16,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         crossorigin="anonymous" />
     <link rel="icon" type="image/icon" href="Logo.ico" />
-    <title>Login</title>
+    <title>Register</title>
 </head>
 
 <body>
@@ -26,46 +26,96 @@
         crossorigin="anonymous"></script>
     <script src="login.js" type="module"></script>
     <div class="Main">
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="deamer"></div>
-                <div class="carousel-item active">
-                    <img src="../Asset/coffee_shop.jpeg" class="bg">
-                </div>
-            </div>
-        </div>
         <div class="loginplace">
             <center>
-                <img src="Logo.png" alt="" class="logo" />
-                <form id="LoginForm">
+                <img src="../Asset/Logo.png" alt="" class="logo" />
+                <form name="Regist" action="SignUp.php" method="post">
                     <div class="userform">
-                        <img src="profile-user.png" alt="" class="image" />
+                        <img src="../Asset/user.png" alt="" class="image" />
                         <input
-                            type="email"
-                            placeholder="IgnatiusMail"
-                            name="user"
+                            type="text"
+                            placeholder="Full Name"
+                            name="Name"
                             class="usernamedesing"
                             id="username"
-                            focus />
+                            required />
                     </div>
                     <br />
                     <div class="userform">
-                        <img src="padlock.png" alt="" class="image" />
+                        <img src="../Asset/user.png" alt="" class="image" />
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            name="Username"
+                            class="usernamedesing"
+                            id="username"
+                            required />
+                    </div>
+                    <br />
+                    <div class="userform">
+                        <img src="../Asset/key.png" alt="" class="image" />
                         <input
                             type="password"
                             placeholder="Password"
-                            name="pass"
+                            name="Password"
                             class="passworddesing"
-                            id="password" />
-                        <img src="eye.png" class="image" type="button" id="ShowHide" />
+                            id="password"
+                            required />
+                        <img src="../Asset/eye.png" class="image" type="button" id="ShowHide" />
                     </div>
-                    <p class="error" id="error">Email or Password incorrect</p>
-                    <button type="submit" class="Loginbtn">Masuk</button>
+                    <br />
+                    <div class="userform">
+                        <img src="../Asset/user.png" alt="" class="image" />
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            name="Email"
+                            class="usernamedesing"
+                            id="username"
+                            required />
+                    </div>
+                    <br />
+                    <button type="submit" name="submit" class="Loginbtn">Register</button>
+                    <p>Already have an account?<a href="login.php">Login</a></p>
                 </form>
-                <p class="Copyright">&copy;Skydome 2024</p>
+                <p class="Copyright">&copy;Skydome 2025</p>
             </center>
         </div>
         <?php
+        $db = mysqli_connect('localhost', 'root', '', 'pos_app');
+        function usernameExists($db, $username)
+        {
+            $sanitizedUsername = mysqli_real_escape_string($db, $username);
+            $sql = "SELECT COUNT(*) FROM user WHERE Username = '$sanitizedUsername'";
+            $result = mysqli_query($db, $sql);
+            if ($result) {
+                $row = mysqli_fetch_array($result);
+                $count = $row[0];
+                return $count > 0;
+            } else {
+                error_log("Database query error: " . mysqli_error($db));
+                return false;
+            }
+        }
+        if (isset($_POST['submit'])) {
+            $Name = $_POST['Name'];
+            $Username = $_POST['Username'];
+            $Email = $_POST['Email'];
+            $Password = password_hash($_POST['Password'], PASSWORD_DEFAULT);
+            if (usernameExists($db, $Username)) {
+                echo "<script>alert('Username already taken. Please choose a different username.');</script>";
+            } else {
+                // Username is available, proceed with registration
+                $sql = "INSERT INTO user(Name, Username, Password, Email) VALUES('$Name', '$Username', '$Password', '$Email')";
+                $send = mysqli_query($db, $sql);
+
+                if ($send) {
+                    echo "<script>alert('Registration Successful');</script>";
+                } else {
+                    echo "<script>alert('Registration Failed');</script>";
+                }
+            }
+        }
         ?>
     </div>
 </body>

@@ -1,10 +1,6 @@
 <?php
 session_start();
 $_SESSION['error'] = "";
-if (isset($_SESSION['Username'])) {
-    header("location:Dashboard.php");
-    exit;
-}
 function verifyLogin($conn, $username, $password)
 {
     $sanitizedUsername = mysqli_real_escape_string($conn, $username);
@@ -54,7 +50,7 @@ if (isset($_POST['loginbtn'])) {
         rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         crossorigin="anonymous" />
-    <link rel="icon" type="image/icon" href="../Asset/Logo.ico" />
+    <link rel="icon" type="image/icon" href="Logo.ico" />
     <title>Login</title>
 </head>
 
@@ -89,9 +85,19 @@ if (isset($_POST['loginbtn'])) {
                             id="password" />
                         <img src="../Asset/eye.png" class="image" type="button" id="ShowHide" />
                     </div>
+                    <br>
+                    <div class="userform">
+                        <img src="../Asset/user.png" alt="" class="image" />
+                        <input
+                            type="text"
+                            placeholder="Shop Code"
+                            name="SCODE"
+                            class="usernamedesing"
+                            id="username"
+                            focus />
+                    </div>
                     <button type="submit" class="Loginbtn" name="loginbtn">Masuk</button>
                     <p class="error" id="error"><?php echo $_SESSION['error'] ?></p>
-                    <p>Don't have an account?<a href="SignUp.php">SignUp</a></p>
                 </form>
                 <p class="Copyright">&copy;Skydome 2025</p>
             </center>

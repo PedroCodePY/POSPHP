@@ -1,0 +1,64 @@
+*{
+    font-family: "Poppins";
+    margin: 0;
+    padding: 0;
+}
+.main{
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+}
+.navbar{
+    width: 20%;
+    height: 100%;
+    background-color: rgba(0, 72, 149, 0.756);
+    display:block;
+    border-radius: 0;
+}
+.content{
+    width: 80%;
+    height: 100%;
+}
+.menutop{
+    width: 100%;
+    height: 20%;
+}
+.manage{
+    width: 100%;
+    height: 80%;
+}
+.error{
+    width: 100%;
+    height: 100%;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+}
+.image{
+    width: 25%;
+    height: auto;
+}
+.text{
+    text-align: center;
+}
+.nav-link{
+    color: white;
+    text-decoration: none;
+}
+.logOut{
+    width: 100%;
+    height: 5%;
+}
+.logo{
+    width: 100%;
+    height: 40%;
+}
+.mainNav{
+    width: 100%;
+    height: 55%;
+}
+.btnStrNW{
+    color: white;
+    text-decoration: none;
+}
