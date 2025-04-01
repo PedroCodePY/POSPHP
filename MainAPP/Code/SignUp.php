@@ -118,6 +118,7 @@
         }
         ?>
     </div>
+    <script src="../Javascript/HideShow.js"></script>
 </body>
 
 </html>

@@ -11,10 +11,10 @@ if (!isset($_SESSION['Username'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Store</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="icon" type="image/icon" href="../Asset/Logo.ico" />
-    <link rel="stylesheet" href="../Style/Dashboard.css">
+    <link rel="icon" type="image/icon" href="../../Asset/Logo.ico" />
+    <link rel="stylesheet" href="../../Style/Dashboard.css">
 </head>
 
 <body>
@@ -22,28 +22,28 @@ if (!isset($_SESSION['Username'])) {
         <div class="navbar">
             <div class="logo">
                 <center>
-                    <img class="logoimg" src="../Asset/Logo.png" alt="">
+                    <img class="logoimg" src="../../Asset/Logo.png" alt="">
                 </center>
             </div>
             <div class="mainNav">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#"><img class="icon" src="../Asset/home.png">Home</a>
+                        <a class="nav-link" aria-current="page" href="../Dashboard.php"><img class="icon" src="../../Asset/home.png">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Menu/Store.php"><img class="icon" src="../Asset/store.png">Store</a>
+                        <a class="nav-link active" href="#"><img class="icon" src="../../Asset/store.png">Store</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Menu/Product.php"><img class="icon" src="../Asset/cubes.png">Product</a>
+                        <a class="nav-link" href="Product.php"><img class="icon" src="../../Asset/cubes.png">Product</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><img class="icon" src="../Asset/transaction-history.png">Transaction</a>
+                        <a class="nav-link" href="#"><img class="icon" src="../../Asset/transaction-history.png">Transaction</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Menu/User.php"><img class="icon" src="../Asset/users-avatar.png">User</a>
+                        <a class="nav-link" href="User.php"><img class="icon" src="../../Asset/users-avatar.png">User</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Menu/Settings.php"><img class="icon" src="../Asset/settings.png">Settings</a>
+                        <a class="nav-link" href="Settings.php"><img class="icon" src="../../Asset/settings.png">Settings</a>
                     </li>
                 </ul>
             </div>
@@ -79,7 +79,7 @@ if (!isset($_SESSION['Username'])) {
                 $query = mysqli_query($con1, $sql);
                 if (mysqli_num_rows($query) > 0) {
                     foreach ($query as $row) {
-                        $_SESSION['StoreName'] = $row['ShopName'];
+                        $_SESSION['Store'] = $row['ShopCode'];
                     }
                 } else {
                 ?>

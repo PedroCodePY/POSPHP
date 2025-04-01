@@ -4,10 +4,30 @@ if (!isset($_SESSION['Username'])) {
     header("location:login.php");
     exit;
 }
+if (!isset($_SESSION['ShopCode'])) {
+    if (!isset($_SESSION['ShopCode'])) {
+        function generateRandomCode($length = 5)
+        {
+            $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            $code = '';
+            for ($i = 0; $i < $length; $i++) {
+                $code .= $characters[rand(0, strlen($characters) - 1)];
+            }
+            return $code . $_SESSION['ShopName'];
+        }
+        $_SESSION['ShopCode'] = generateRandomCode();
+    }
+}
 if (isset($_POST['send'])) {
-    $_SESSION['ShopLogo'] = $_POST['SLogo'];
-    header("location:RulesAndRegulation.php");
-    exit;
+    $ImageName = $_FILES['SLogo']['name'];
+    $tmp = $_FILES['SLogo']['tmp_name'];
+    $folder = '../Asset/ShopLogo/' . $ImageName;
+    if (move_uploaded_file($tmp, $folder)) {
+        $_SESSION['ShopLogo'] = $ImageName;
+        $_SESSION['ShopCode'] = $_POST['SC'];
+        header("location:RulesAndRegulation.php");
+        exit;
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -28,17 +48,30 @@ if (isset($_POST['send'])) {
             <img src="../Asset/New employee-rafiki.svg" alt="" class="img">
         </div>
         <div class="component">
-            <form id="LoginForm" method="post" class="Regist" action="Step3.php">
+            <form id="LoginForm" method="post" class="Regist" action="Step3.php" enctype="multipart/form-data" autocomplete="off">
                 <div class="component">
                     <p>Shop Logo</p>
                     <div class="userform">
                         <input
                             type="file"
                             name="SLogo"
+                            accept=".png, .jpeg, .jpg"
                             class="usernamedesing"
-                            accept=".jpg, .jpeg, .png"
                             id="username"
                             required />
+                    </div>
+                </div>
+                <br>
+                <div class="component">
+                    <p>Shop Code</p>
+                    <div class="userform">
+                        <input
+                            type="text"
+                            name="SC"
+                            value="<?php echo $_SESSION['ShopCode']; ?>"
+                            class="usernamedesing"
+                            id="shopcode"
+                            readonly />
                     </div>
                 </div>
                 <div class="btnclass">

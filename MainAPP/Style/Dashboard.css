@@ -21,11 +21,36 @@
 }
 .menutop{
     width: 100%;
-    height: 20%;
+    height: 5%;
+    justify-items:flex-end;
+    padding-right: 1%;
+    display: flex;
+    text-align: center;
+    justify-content: right;
 }
 .manage{
     width: 100%;
-    height: 80%;
+    height: 95%;
+}
+.usermanage{
+    width: 100%;
+    height: 100%;
+}
+.productmanage{
+    width: 100%;
+    height: 100%;
+    padding-top: 1%;
+    justify-items: center;
+}
+.settingsmanage{
+    width: 100%;
+    height: 100%;
+}
+.topPart{
+    width: 100%;
+    height: 25%;
+    display: flex;
+    align-items: center;
 }
 .error{
     width: 100%;
@@ -42,9 +67,22 @@
 .text{
     text-align: center;
 }
+.nav{
+    width: 100%;
+}
 .nav-link{
     color: white;
     text-decoration: none;
+    width: 100%;
+}
+.nav-link.active{
+    background-color: rgba(255, 255, 255, 0.884);
+    border-left: 5px solid;
+    color: #1e99e0;
+}
+.nav-link:hover{
+    background-color: rgba(255, 255, 255, 0.658);
+    color: #1e99e0;
 }
 .logOut{
     width: 100%;
@@ -53,6 +91,7 @@
 .logo{
     width: 100%;
     height: 40%;
+    align-content: center;
 }
 .mainNav{
     width: 100%;
@@ -61,4 +100,38 @@
 .btnStrNW{
     color: white;
     text-decoration: none;
+}
+.logoimg{
+    height: auto;
+    width: 80%;
+    border-radius: 25%;
+}
+.pp{
+    padding-top: 0.5%;
+    height: 99%;
+    width: auto;
+    margin-left: 1%;
+}
+.pps{
+    padding-top: 0.5%;
+    height: 99%;
+    width: auto;
+    margin-left: 1%;
+    margin-right: 2%;
+}
+.Name{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    padding-top: 0.5%;
+}
+.icon{
+    width: 8%;
+    height: 8%;
+    margin-right: 1%;
+}
+.tb{
+    width: 95%;
+    height: auto;
+    max-height: 95%;
 }

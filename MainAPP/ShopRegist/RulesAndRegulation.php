@@ -3,10 +3,10 @@ session_start();
 if (!isset($_SESSION['Username'])) {
     header("location:login.php");
     exit;
-    if (isset($_POST['send'])) {
-        header("location:Submit.php");
-        exit;
-    }
+}
+if (isset($_POST['send'])) {
+    header("location:uploud.php");
+    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -27,22 +27,22 @@ if (!isset($_SESSION['Username'])) {
             <img src="../Asset/New employee-rafiki.svg" alt="" class="img">
         </div>
         <div class="component">
-            <form method="post" action="RulesAndRegulation.php">
+            <form id="LoginForm" method="post" class="Regist" action="RulesAndRegulation.php">
                 <div class="form-check">
-                    <input class="form-check-input" name="A1" type="checkbox" id="A1" value="True" required>
+                    <input class="form-check-input" name="A1" type="checkbox" id="flexCheckDefault" value="True" required>
                     <label class="form-check-label" for="flexCheckDefault">
                         I Agree into Terms & Condition
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" name="A2" type="checkbox" id="A1" value="True" required>
+                    <input class="form-check-input" name="A2" type="checkbox" id="flexCheckDefault" value="True" required>
                     <label class="form-check-label" for="flexCheckDefault">
                         I Agree to all the Regulation that had been made
                     </label>
                 </div>
                 <div class="btnclass">
                     <button type="button" id="back" class="btn btn-outline-danger">Back</button>
-                    <button type="submit" id="btn" name="send" class="btn btn-primary">Continue</button>
+                    <button type="submit" name="send" class="btn btn-primary">Continue</button>
                 </div>
             </form>
         </div>
