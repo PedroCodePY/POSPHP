@@ -135,3 +135,22 @@
     height: auto;
     max-height: 95%;
 }
+.shopInfo{
+    width: 100%;
+    height: 30%;
+    display: flex;
+}
+.Shoplogo{
+    height : 100%;
+    width: 30%;
+    align-content: center;
+    justify-items: center;
+}
+.shopDetail{
+    width: 70%;
+    height: 100%;
+    align-content: center;  
+}
+.bottom{
+    text-align: right;
+}

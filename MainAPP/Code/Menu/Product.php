@@ -50,7 +50,7 @@ if (!isset($_SESSION['Username'])) {
             <div class="logOut">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="LogOut.php">Log Out</a>
+                        <a class="nav-link" aria-current="page" href="../LogOut.php">Log Out</a>
                     </li>
                 </ul>
             </div>

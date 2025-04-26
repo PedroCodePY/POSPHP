@@ -95,3 +95,17 @@
     justify-items: center;
     align-items: center;
 }
+.main1 {
+    display: flex;
+    justify-content: center; 
+    align-items: center;       
+    height: 100dvh;
+}
+
+.form-box {
+  width: 40%;
+  height: 80%;
+  border-radius: 25px;
+  background-color: #FFFFFF;
+  border: 5px solid #1e99e0;
+}

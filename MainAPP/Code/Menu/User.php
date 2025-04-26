@@ -56,7 +56,7 @@ if (!isset($_SESSION['Username'])) {
             </div>
         </div>
         <div class="content">
-            <div class="usermanage">
+            <div class="manage" style="height: 100%; align-content:center; justify-items: center;">
                 <?php
                 $con1 = mysqli_connect("localhost", "root", "", "pos_app");
                 $sql = "SELECT * FROM shoplist WHERE ShopOwner = '" . $_SESSION['Username'] . "'";
@@ -69,15 +69,64 @@ if (!isset($_SESSION['Username'])) {
                         $sqln = "SELECT * FROM `$tableName`";
                         $queryr = mysqli_query($con1, $sqln);
                         if (mysqli_num_rows($queryr) > 0) {
-                        } else {
                 ?>
+                            <div class="card" style="width: 98%; height:98%; border-radius: 15px; text-align: center;">
+                                <div class="card-body">
+                                    <div class="container text-center">
+                                        <div class="row align-items-start">
+                                            <div class="col">
+                                            </div>
+                                            <div class="col">
+                                            </div>
+                                            <div class="col">
+                                                <a href="../UserRegist/Main.php"><button type="button" id="APBTN" style="width:100%;" class="btn btn-outline-primary"> + Add User</button></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table class="table table-hover" style="width: 98%;">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Full Name</th>
+                                                <th scope="col">Username</th>
+                                                <th scope="col">Password</th>
+                                                <th scope="col">Profile Picture</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Edit</th>
+                                                <th scope="col">Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            foreach ($queryr as $row) {
+                                            ?>
+                                                <tr>
+                                                    <th scope="row"><?php echo $row['ID']; ?></th>
+                                                    <td><?php echo $row['Name']; ?></td>
+                                                    <td><?php echo $row['Username']; ?></td>
+                                                    <td><?php echo $row['Password']; ?></td>
+                                                    <td><?php echo $row['ProfilePicture']; ?></td>
+                                                    <td><?php echo $row['Email']; ?></td>
+                                                    <td><a href="EditProduct.php?id=<?php echo $row['ID']; ?>" class="btn btn-outline-success">Edit</a></td>
+                                                    <td><a href="DeleteProduct.php?id=<?php echo $row['ID']; ?>" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this product?')">Delete</a></td>
+                                                </tr>
+                                            <?php
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        <?php
+                        } else {
+                        ?>
                             <div class='error'>
                                 <div class="image">
                                     <img src="../../Asset/Lost.svg" class="lost">
                                 </div>
                                 <div class="text">
                                     <h1>No user found</h1>
-                                    <button type="button" class="btn btn-primary"><a class="btnStrNW" href="../ShopRegist/Main.php">Add new user</a></button>
+                                    <button type="button" class="btn btn-primary"><a class="btnStrNW" href="../UserRegist/Main.php">Add new user</a></button>
                                 </div>
                             </div>
                     <?php
@@ -91,7 +140,7 @@ if (!isset($_SESSION['Username'])) {
                         </div>
                         <div class="text">
                             <h1>No shop found</h1>
-                            <button type="button" class="btn btn-primary"><a class="btnStrNW" href="../ShopRegist/Main.php">Create new shop</a></button>
+                            <button type="button" class="btn btn-primary"><a class="btnStrNW" href="../../ShopRegist/Main.php">Create new shop</a></button>
                         </div>
                     </div>
                 <?php

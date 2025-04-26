@@ -4,22 +4,20 @@ if (!isset($_SESSION['Username'])) {
     header("location:login.php");
     exit;
 } else {
-    $productname = $_SESSION['ProductName'];
-    $productimage = $_SESSION['ProductImage'];
-    $productprice = $_SESSION['Price'];
-    $productquantity = $_SESSION['Quantity'];
+    $FN = $_SESSION['FullName'];
+    $E = $_SESSION['Email'];
+    $USN = $_SESSION['USER'];
+    $PSSD = $_SESSION['Password'];
     $shopname = $_SESSION['StoreName'];
     $conn = mysqli_connect("localhost", "root", "", "pos_app");
     $shopname = $_SESSION['Store'];
-    $tableName = preg_replace("/[^a-zA-Z0-9_]/", "", "shop_" . $shopname . "_product");
-    $sql = "INSERT INTO `$tableName` (ProductName, Quantity, Price, ProductImage) VALUES ('$productname', '$productquantity', '$productprice', '$productimage')";
-    $sql2 = "INSERT INTO menupos (Name, Price, Image, Shop, Quantity) VALUES ('$productname', '$productprice', '$productimage', '$shopname', '$productquantity')";
+    $tableName = preg_replace("/[^a-zA-Z0-9_]/", "", "shop_" . $shopname . "_users");
+    $sql = "INSERT INTO `$tableName` (Name, Username, Password, Email) VALUES ('$FN', '$USN', '$PSSD', '$E')";
     $query1 = mysqli_query($conn, $sql);
-    $query2 = mysqli_query($conn, $sql2);
-    unset($_SESSION['ProductName']);
-    unset($_SESSION['ProductImage']);
-    unset($_SESSION['Price']);
-    unset($_SESSION['Quantitu']);
+    unset($_SESSION['FullName']);
+    unset($_SESSION['Email']);
+    unset($_SESSION['USER']);
+    unset($_SESSION['Password']);
 }
 ?>
 <!DOCTYPE html>
@@ -29,7 +27,7 @@ if (!isset($_SESSION['Username'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Shop</title>
-    <meta http-equiv="refresh" content="15; URL='../Menu/Product.php'">
+    <meta http-equiv="refresh" content="15; URL='../Menu/User.php'">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../Style/ShopRegist.css">
     <link rel="icon" type="image/icon" href="../Asset/Logo.ico" />

@@ -1,35 +1,27 @@
 <?php
 session_start();
 $_SESSION['error'] = "";
-function verifyLogin($conn, $username, $password)
-{
-    $sanitizedUsername = mysqli_real_escape_string($conn, $username);
-    $sql = "SELECT Password FROM user WHERE Username = '$sanitizedUsername'";
-    $result = mysqli_query($conn, $sql);
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $hashedPasswordFromDatabase = $row['Password'];
-        if (password_verify($password, $hashedPasswordFromDatabase)) {
-            return true;
-        } else {
-            return false;
-        }
-    } else {
-        return false;
-    }
-}
 $conn = mysqli_connect("localhost", "root", "", "pos_app");
 if (isset($_POST['loginbtn'])) {
     $Username = $_POST['user'];
     $password = $_POST['pass'];
-    if (verifyLogin($conn, $Username, $password)) {
-        $_SESSION['Username'] = $Username;
-        header("Location: dashboard.php");
-        exit;
+    $shopcode = $_POST['SCODE'];
+    $table = "shop_" . $shopcode . "_users";
+    $sql1 = "SELECT * FROM shoplist WHERE ShopCode = '$shopcode'";
+    $result1 = mysqli_query($conn, $sql1);
+    if (mysqli_num_rows($result1) > 0) {
+        $sql2 = "SELECT * FROM $table WHERE Username = '$Username' AND Password = '$password'";
+        $result2 = mysqli_query($conn, $sql2);
+        if (mysqli_num_rows($result2)) {
+            $_SESSION['Username'] = $Username;
+            $_SESSION['ShopCode'] = $shopcode;
+            header("location: Dashboard.php");
+            exit;
+        } else {
+            $_SESSION['error'] = "Invalid username or password";
+        }
     } else {
-        $_SESSION["error"] = "Invalid username or password";
-        header("location: login.php");
-        exit;
+        $_SESSION["error"] = "Invalid shop code";
     }
 }
 ?>
