@@ -13,7 +13,7 @@ if (isset($_POST['loginbtn'])) {
         $sql2 = "SELECT * FROM $table WHERE Username = '$Username' AND Password = '$password'";
         $result2 = mysqli_query($conn, $sql2);
         if (mysqli_num_rows($result2)) {
-            $_SESSION['Username'] = $Username;
+            $_SESSION['Username2'] = $Username;
             $_SESSION['ShopCode'] = $shopcode;
             header("location: Dashboard.php");
             exit;

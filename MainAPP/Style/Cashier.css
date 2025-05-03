@@ -1,0 +1,101 @@
+*{
+    font-family: "Poppins";
+    margin: 0;
+    padding: 0;
+}
+.sticky-top{
+    width: 100%;
+    height: 3%;
+    margin-bottom: 2%;
+}
+.btn{
+    width: 100%;
+    height: 6%;
+    background-color: #008cff;
+    border: 0;
+    border-radius: 25px;
+    margin-bottom: 1%;
+    width: 98%;
+    margin-left: 1%;
+    color: white;
+    font-weight: bold;
+    font-size: larger;
+}
+.main{
+    justify-items: center;
+    width: 100%;
+    height: 100dvh;
+}
+.menu{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-auto-rows: 250px;
+    height: 100%;
+    overflow: auto;
+}
+.card{
+    margin: 1%;
+    text-align: center;
+}
+.card-body{
+    height: auto;
+    align-items: center;
+    align-content: center;
+}
+.btnico{
+    height:65%;
+    margin-right: 2%;
+}
+.quantity{
+    display: flex;
+    border: 2px solid #008cff;
+    height: auto;
+    border-radius: 10px;
+    padding: 2%;
+}
+.pm{
+    width: 15%;
+    height: 15%;
+    background-color: white;
+    border: none;
+}
+.Num{
+    width: 68%;
+    border: none;
+    text-align: center;
+}
+.Num::-webkit-outer-spin-button,
+.Num::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.Num[type=number] {
+  -moz-appearance: textfield;
+}
+form{
+    height: 85%;
+    width: 97%;
+    padding-left: 0;
+    text-align: center;
+    border: 0;
+}
+.card-img-top{
+    width: 100%;
+    height: auto;
+}
+.manage{
+    width: 100%;
+    height: 95%;
+    justify-items: center;
+}
+.text{
+    text-align: left;
+    width: 90%;
+    height: 100%;
+    border-right: 5px dashed #008cff;
+}
+.action{
+    width: 10%;
+    height: 100%;
+}

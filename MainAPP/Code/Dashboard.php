@@ -37,7 +37,7 @@ if (!isset($_SESSION['Username'])) {
                         <a class="nav-link" href="Menu/Product.php"><img class="icon" src="../Asset/cubes.png">Product</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><img class="icon" src="../Asset/transaction-history.png">Transaction</a>
+                        <a class="nav-link" href="Menu/Transaction.php"><img class="icon" src="../Asset/transaction-history.png">Transaction</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="Menu/User.php"><img class="icon" src="../Asset/users-avatar.png">User</a>
@@ -80,9 +80,93 @@ if (!isset($_SESSION['Username'])) {
                 if (mysqli_num_rows($query) > 0) {
                     foreach ($query as $row) {
                         $_SESSION['StoreName'] = $row['ShopName'];
+                        $_SESSION['ShopCode'] = $row['ShopCode']
+                ?>
+                        <div class="container text-center">
+                            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+                                <div class="col">
+                                    <div class="card" style="width: auto;">
+                                        <div class="card-body">
+                                            <?php
+                                            $table = "shop_" . $_SESSION['ShopCode'] . "_product";
+                                            $sql3 = "SELECT * FROM $table";
+                                            $tP = 0;
+                                            $result = mysqli_query($conn, $sql3);
+                                            if (mysqli_num_rows($result) > 0) {
+                                                for ($i = 0; $i < mysqli_num_rows($result); $i++) {
+                                                    $tP = $tP + 1;
+                                                }
+                                            }
+                                            ?>
+                                            <h2>Products</h2>
+                                            <h3><?php echo $tP; ?></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card" style="width: auto;">
+                                        <div class="card-body">
+                                            <?php
+                                            $table2 = "shop_" . $_SESSION['ShopCode'] . "_users";
+                                            $sql4 = "SELECT * FROM $table2";
+                                            $tP2 = 0;
+                                            $result2 = mysqli_query($conn, $sql4);
+                                            if (mysqli_num_rows($result2) > 0) {
+                                                for ($i = 0; $i < mysqli_num_rows($result2); $i++) {
+                                                    $tP2 = $tP2 + 1;
+                                                }
+                                            }
+                                            ?>
+                                            <h2>Workers</h2>
+                                            <h3><?php echo $tP2; ?></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card" style="width: auto;">
+                                        <div class="card-body">
+                                            <?php
+                                            $table3 = "shop_" . $_SESSION['ShopCode'] . "_transaction ";
+                                            $sql5 = "SELECT * FROM `transaction` WHERE `Store` = '" . $_SESSION['StoreName'] . "'";
+                                            $tP2 = 0;
+                                            $result2 = mysqli_query($conn, $sql5);
+                                            if (mysqli_num_rows($result2) > 0) {
+                                                for ($i = 0; $i < mysqli_num_rows($result2); $i++) {
+                                                    $tP2 = $tP2 + 1;
+                                                }
+                                            }
+                                            ?>
+                                            <h2>Transactions</h2>
+                                            <h3><?php echo $tP2; ?></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card" style="width: auto;">
+                                        <div class="card-body">
+                                            <?php
+                                            $table4 = "shop_" . $_SESSION['ShopCode'] . "_transaction";
+                                            $sql6 = "SELECT Price FROM $table4";
+                                            $tP2 = 0;
+                                            $result2 = mysqli_query($conn, $sql6);
+                                            if (mysqli_num_rows($result2) > 0) {
+                                                for ($i = 0; $i < mysqli_num_rows($result2); $i++) {
+                                                    $rowM = mysqli_fetch_assoc($result2);
+                                                    $tP2 = $tP2 + $rowM['Price'];
+                                                }
+                                            }
+                                            ?>
+                                            <h2>Total Selling</h2>
+                                            <h3>Rp <?php echo $tP2; ?></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
                     }
                 } else {
-                ?>
+                    ?>
                     <div class='error'>
                         <div class="image">
                             <img src="../Asset/Lost.svg" class="lost">
