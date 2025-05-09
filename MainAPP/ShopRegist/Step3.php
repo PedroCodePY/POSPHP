@@ -18,6 +18,20 @@ if (!isset($_SESSION['ShopCode'])) {
         $_SESSION['ShopCode'] = generateRandomCode();
     }
 }
+if (isset($_SESSION['ShopCode'])) {
+    if (isset($_SESSION['ShopCode'])) {
+        function generateRandomCode($length = 5)
+        {
+            $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            $code = '';
+            for ($i = 0; $i < $length; $i++) {
+                $code .= $characters[rand(0, strlen($characters) - 1)];
+            }
+            return $code . $_SESSION['ShopName'];
+        }
+        $_SESSION['ShopCode'] = generateRandomCode();
+    }
+}
 if (isset($_POST['send'])) {
     $ImageName = $_FILES['SLogo']['name'];
     $tmp = $_FILES['SLogo']['tmp_name'];

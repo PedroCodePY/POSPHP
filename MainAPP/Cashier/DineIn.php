@@ -16,6 +16,18 @@ if (!isset($_SESSION['Username2'])) {
     <link rel="icon" type="image/icon" href="../Asset/Logo.ico" />
     <link rel="stylesheet" href="../Style/Dashboard.css">
     <link rel="stylesheet" href="../Style/DineIn.css">
+    <style>
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            /* Reduced gap between cards */
+            max-height: 100vh;
+            /* Set max-height to limit the height */
+            overflow-y: auto;
+            /* Make it scrollable */
+        }
+    </style>
 </head>
 
 <body>
@@ -35,7 +47,7 @@ if (!isset($_SESSION['Username2'])) {
                         <a class="nav-link active" href="#"><img class="icon" src="../Asset/transaction-history.png">Dine In</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Menu/Settings.php"><img class="icon" src="../Asset/settings.png">Settings</a>
+                        <a class="nav-link" href="Settings.php"><img class="icon" src="../Asset/settings.png">Settings</a>
                     </li>
                 </ul>
             </div>
@@ -49,22 +61,22 @@ if (!isset($_SESSION['Username2'])) {
         </div>
         <div class="content">
             <div class="manage" style="height: 100%">
-                <form method="post" action="OrderFunction.php" style="height: 90%;">
-                    <div class="menu">
+                <form method="post" action="DineInFunc.php" style="height: 90%;">
+                    <div class="Transaction">
                         <?php
                         $conn = mysqli_connect("localhost", "root", "", "pos_app");
                         $sql3 = "SELECT ShopName FROM shoplist WHERE ShopCode = '" . $_SESSION['ShopCode'] . "'";
                         $query3 = mysqli_query($conn, $sql3);
                         $row3 = mysqli_fetch_assoc($query3);
                         $shopname = $row3['ShopName'];
-                        $sql4 = "SELECT * FROM `transaction` WHERE `Type` = 'OrderApp' AND `Store` = '$shopname' AND `Status` = ''";
+                        $sql4 = "SELECT * FROM `transaction` WHERE `Type` = 'OrderApp' AND `Store` = '$shopname' AND `Type` = 'OrderApp'";
                         $query4 = mysqli_query($conn, $sql4);
                         if (mysqli_num_rows($query4) > 0) {
                             foreach ($query4 as $row) {
                         ?>
                                 <div class="card">
                                     <div class="card-body" style="display: flex;">
-                                        <div class="text">
+                                        <div class="text1">
                                             <h2 class="card-title"><?php echo $row['TransactionCode']; ?></h2>
                                             <h5 class="card-subtitle">Product:</h5>
                                             <ul>
@@ -84,8 +96,23 @@ if (!isset($_SESSION['Username2'])) {
                                                 ?>
                                             </ul>
                                             <h5 class="card-text">Total amount: <?php echo $price; ?></h5>
+                                            <h5 class="card-text">
+                                                Status:
+                                                <span style="color: <?php echo ($row['Status'] === 'Done') ? 'green' : 'red'; ?>;">
+                                                    <?php echo $row['Status']; ?>
+                                                </span>
+                                            </h5>
                                         </div>
-                                        <div class="action"></div>
+                                        <div class="action" style="display: flex; align-items: center; justify-content: center;">
+                                            <?php if ($row['Status'] != 'Done') { ?>
+                                                <form method="post" action="OrderFunction.php">
+                                                    <input type="hidden" name="TransactionCode" value="<?php echo $row['TransactionCode']; ?>">
+                                                    <button class="btn1 btn-outline-primary" style="height:40px;" name="confirm_transaction" onclick="return confirm('Are you sure you want to complete this transaction?')">Confirm</button>
+                                                </form>
+                                            <?php } else { ?>
+                                                <button class="btn1 btn-outline-success" style="height:40px;" disabled>Completed</button>
+                                            <?php } ?>
+                                        </div>
                                     </div>
                                 </div>
                         <?php
@@ -99,22 +126,6 @@ if (!isset($_SESSION['Username2'])) {
             </div>
         </div>
     </div>
-    <script>
-        function changeQuantity(itemId, changeAmount) {
-            const input = document.getElementById(`quantity-${itemId}`);
-            if (input) {
-                let currentValue = parseInt(input.value);
-                if (isNaN(currentValue)) {
-                    currentValue = 0;
-                }
-                const newValue = currentValue + changeAmount;
-                if (newValue >= 0) { // Prevent negative quantities
-                    input.value = newValue;
-                    checkQuantities();
-                }
-            }
-        }
-    </script>
 </body>
 
 </html>

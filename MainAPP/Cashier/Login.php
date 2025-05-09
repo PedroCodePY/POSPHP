@@ -18,10 +18,10 @@ if (isset($_POST['loginbtn'])) {
             header("location: Dashboard.php");
             exit;
         } else {
-            $_SESSION['error'] = "Invalid username or password";
+            $_SESSION['error2'] = "Invalid username or password";
         }
     } else {
-        $_SESSION["error"] = "Invalid shop code";
+        $_SESSION["error2"] = "Invalid shop code";
     }
 }
 ?>
@@ -42,7 +42,7 @@ if (isset($_POST['loginbtn'])) {
         rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         crossorigin="anonymous" />
-    <link rel="icon" type="image/icon" href="Logo.ico" />
+    <link rel="icon" type="image/icon" href="../Asset/Logo.ico" />
     <title>Login</title>
 </head>
 
@@ -89,7 +89,7 @@ if (isset($_POST['loginbtn'])) {
                             focus />
                     </div>
                     <button type="submit" class="Loginbtn" name="loginbtn">Masuk</button>
-                    <p class="error" id="error"><?php echo $_SESSION['error'] ?></p>
+                    <p class="error" id="error"><?php echo $_SESSION['error2'] ?></p>
                 </form>
                 <p class="Copyright">&copy;Skydome 2025</p>
             </center>

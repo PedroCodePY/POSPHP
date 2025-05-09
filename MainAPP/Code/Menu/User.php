@@ -37,7 +37,7 @@ if (!isset($_SESSION['Username'])) {
                         <a class="nav-link" href="Product.php"><img class="icon" src="../../Asset/cubes.png">Product</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><img class="icon" src="../../Asset/transaction-history.png">Transaction</a>
+                        <a class="nav-link" href="Transaction.php"><img class="icon" src="../../Asset/transaction-history.png">Transaction</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="#"><img class="icon" src="../../Asset/users-avatar.png">User</a>
@@ -50,7 +50,7 @@ if (!isset($_SESSION['Username'])) {
             <div class="logOut">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="LogOut.php">Log Out</a>
+                        <a class="nav-link" aria-current="page" href="../LogOut.php">Log Out</a>
                     </li>
                 </ul>
             </div>

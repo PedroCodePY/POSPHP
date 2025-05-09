@@ -37,7 +37,7 @@ if (!isset($_SESSION['Username'])) {
                         <a class="nav-link active" href="#"><img class="icon" src="../../Asset/cubes.png" alt="Product">Product</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><img class="icon" src="../../Asset/transaction-history.png" alt="Transaction">Transaction</a>
+                        <a class="nav-link" href="Transaction.php"><img class="icon" src="../../Asset/transaction-history.png" alt="Transaction">Transaction</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="User.php"><img class="icon" src="../../Asset/users-avatar.png" alt="User">User</a>
@@ -57,85 +57,108 @@ if (!isset($_SESSION['Username'])) {
         </div>
         <div class="content">
             <div class="productmanage">
-                <div class="container text-center">
-                    <div class="row align-items-start">
-                        <div class="col">
+                <?php
+                $con1 = mysqli_connect("localhost", "root", "", "pos_app");
+                $sql = "SELECT * FROM shoplist WHERE ShopOwner = '" . $_SESSION['Username'] . "'";
+                $query = mysqli_query($con1, $sql);
+                if (mysqli_num_rows($query) > 0) {
+                    foreach ($query as $row) {
+                        $_SESSION['Store'] = $row['ShopCode']; ?>
+                        <div class="container text-center">
+                            <div class="row align-items-start">
+                                <div class="col">
+                                </div>
+                                <div class="col">
+                                </div>
+                                <div class="col">
+                                    <button type="button" id="APBTN" style="width:100%;" class="btn btn-outline-primary"> + Add product</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col">
+                        <div class="tb">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Product Image</th>
+                                        <th scope="col">Rate</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $conn = mysqli_connect("localhost", "root", "", "pos_app");
+                                    $shopname = $_SESSION['Store'];
+                                    $tableName = preg_replace("/[^a-zA-Z0-9_]/", "", "shop_" . $shopname . "_product");
+                                    $sql = "SELECT * FROM `$tableName`";
+                                    $query = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($query) > 0) {
+                                        foreach ($query as $row) {
+                                    ?>
+                                            <tr>
+                                                <td>
+                                                    <?php echo $row['ID']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['ProductName']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $row['Quantity']; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo number_format($row['Price'], 0, ',', '.'); ?>
+                                                </td>
+                                                <td>
+                                                    <?php if (!empty($row['ProductImage'])) { ?>
+                                                        <img src="../../Asset/ProductImage/<?php echo $row['ProductImage']; ?>" style="max-width: 100px; height: 70px;">
+                                                    <?php } else { ?>
+                                                        No Image
+                                                    <?php } ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $row['Rate']; ?>
+                                                </td>
+                                                <td>
+                                                    <a href="EditProduct.php?id=<?php echo $row['ID']; ?>" class="btn btn-outline-success">Edit</a>
+                                                </td>
+                                                <td>
+                                                    <a href="DeleteProduct.php?id=<?php echo $row['ID']; ?>" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this product?')">Delete</a>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        }
+                                    } else {
+                                        ?>
+                                        <tr>
+                                            <td colspan="8" class="text-center">No products found.</td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    mysqli_close($conn);
+                                    ?>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="col">
-                            <button type="button" id="APBTN" style="width:100%;" class="btn btn-outline-primary"> + Add product</button>
+                    <?php
+                    }
+                } else {
+                    ?>
+                    <div class='error'>
+                        <div class="image">
+                            <img src="../../Asset/Lost.svg" class="lost">
+                        </div>
+                        <div class="text">
+                            <h1>No shop found</h1>
+                            <button type="button" class="btn btn-primary"><a class="btnStrNW" href="../ShopRegist/Main.php">Create new shop</a></button>
                         </div>
                     </div>
-                </div>
-                <div class="tb">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Product Name</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Product Image</th>
-                                <th scope="col">Rate</th>
-                                <th scope="col">Edit</th>
-                                <th scope="col">Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $conn = mysqli_connect("localhost", "root", "", "pos_app");
-                            $shopname = $_SESSION['Store'];
-                            $tableName = preg_replace("/[^a-zA-Z0-9_]/", "", "shop_" . $shopname . "_product");
-                            $sql = "SELECT * FROM `$tableName`";
-                            $query = mysqli_query($conn, $sql);
-                            if (mysqli_num_rows($query) > 0) {
-                                foreach ($query as $row) {
-                            ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo $row['ID']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo htmlspecialchars($row['ProductName']); ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $row['Quantity']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo number_format($row['Price'], 0, ',', '.'); ?>
-                                        </td>
-                                        <td>
-                                            <?php if (!empty($row['ProductImage'])) { ?>
-                                                <img src="../../Asset/ProductImage/<?php echo $row['ProductImage']; ?>" style="max-width: 100px; height: 70px;">
-                                            <?php } else { ?>
-                                                No Image
-                                            <?php } ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $row['Rate']; ?>
-                                        </td>
-                                        <td>
-                                            <a href="EditProduct.php?id=<?php echo $row['ID']; ?>" class="btn btn-outline-success">Edit</a>
-                                        </td>
-                                        <td>
-                                            <a href="DeleteProduct.php?id=<?php echo $row['ID']; ?>" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this product?')">Delete</a>
-                                        </td>
-                                    </tr>
-                                <?php
-                                }
-                            } else {
-                                ?>
-                                <tr>
-                                    <td colspan="8" class="text-center">No products found.</td>
-                                </tr>
-                            <?php
-                            }
-                            mysqli_close($conn);
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </div>

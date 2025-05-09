@@ -14,6 +14,7 @@ function verifyLogin($conn, $username, $password)
         $row = mysqli_fetch_assoc($result);
         $hashedPasswordFromDatabase = $row['Password'];
         if (password_verify($password, $hashedPasswordFromDatabase)) {
+            $_SESSION['Password'] = $password;
             return true;
         } else {
             return false;

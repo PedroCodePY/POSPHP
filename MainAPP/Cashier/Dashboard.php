@@ -35,7 +35,7 @@ if (!isset($_SESSION['Username2'])) {
                         <a class="nav-link" href="DineIn.php"><img class="icon" src="../Asset/transaction-history.png">Dine In</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Menu/Settings.php"><img class="icon" src="../Asset/settings.png">Settings</a>
+                        <a class="nav-link" href="Settings.php"><img class="icon" src="../Asset/settings.png">Settings</a>
                     </li>
                 </ul>
             </div>
@@ -53,6 +53,7 @@ if (!isset($_SESSION['Username2'])) {
                 $conn = mysqli_connect("localhost", "root", "", "pos_app");
                 $table = "shop_" . $_SESSION['ShopCode'] . "_product";
                 $table2 = "shop_" . $_SESSION['ShopCode'] . "_users";
+                $sql3 = "SELECT ShopName FROM shoplist WHERE ShopCode = '" . $_SESSION['ShopCode'] . "'";
                 $sql2 = "SELECT * FROM $table2 WHERE Username = '" . $_SESSION['Username2'] . "'";
                 $query2 = mysqli_query($conn, $sql2);
                 if (mysqli_num_rows($query2) > 0) {
@@ -74,7 +75,10 @@ if (!isset($_SESSION['Username2'])) {
                     <div class="menu">
                         <?php
                         $conn = mysqli_connect("localhost", "root", "", "pos_app");
-                        $query = "SELECT * FROM menupos";
+                        $query3 = mysqli_query($conn, $sql3);
+                        $row3 = mysqli_fetch_assoc($query3);
+                        $shopname = $row3['ShopName'];
+                        $query = "SELECT * FROM menupos WHERE `Shop` = '$shopname'";
                         $sql_run = mysqli_query($conn, $query);
                         if (mysqli_num_rows($sql_run) > 0) {
                             foreach ($sql_run as $row) {

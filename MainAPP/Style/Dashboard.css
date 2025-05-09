@@ -154,3 +154,21 @@
 .bottom{
     text-align: right;
 }
+.seinput{
+    width: 250px;
+    height: 30px;
+    border: 1px solid #008cff;
+    margin-left: 1%;
+}
+.seinput1{
+    width: 500px;
+    height: 30px;
+    border: 1px solid #008cff;
+    margin-left: 1%;
+}
+.seinput2{
+    width: 100px;
+    height: 30px;
+    border: 1px solid #008cff;
+    margin-left: 1%;
+}

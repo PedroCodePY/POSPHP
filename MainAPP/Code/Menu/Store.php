@@ -37,7 +37,7 @@ if (!isset($_SESSION['Username'])) {
                         <a class="nav-link" href="Product.php"><img class="icon" src="../../Asset/cubes.png">Product</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><img class="icon" src="../../Asset/transaction-history.png">Transaction</a>
+                        <a class="nav-link" href="Transaction.php"><img class="icon" src="../../Asset/transaction-history.png">Transaction</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="User.php"><img class="icon" src="../../Asset/users-avatar.png">User</a>
@@ -50,7 +50,7 @@ if (!isset($_SESSION['Username'])) {
             <div class="logOut">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="LogOut.php">Log Out</a>
+                        <a class="nav-link" aria-current="page" href="../LogOut.php">Log Out</a>
                     </li>
                 </ul>
             </div>
@@ -69,7 +69,7 @@ if (!isset($_SESSION['Username'])) {
                                 <div class="card-title" style="display: flex; width: 100%; flex-direction: column;">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <h3 class="mb-0">Shop Profile</h3>
-                                        <a href="EditProfile.php" class="btn btn-outline-primary btn-lg">Edit</a>
+                                        <a href="StoreEdit.php" class="btn btn-outline-primary btn-lg">Edit</a>
                                     </div>
                                 </div>
                                 <div class="shopInfo">
@@ -83,9 +83,10 @@ if (!isset($_SESSION['Username'])) {
                                         <h4>Location: <?php echo $row['ShopLocation'] ?>, <?php echo $row['ShopPostalCode'] ?></h4>
                                         <h4>Phone Number: <?php echo $row['ShopPN'] ?></h4>
                                         <h4>Email: <?php echo $row['ShopEmail'] ?></h4>
-                                        <h4>Website: </h4>
+                                        <h4>Website: <?php echo $row['ShopWebsite'] ?></h4>
                                     </div>
                                 </div>
+                                <br>
                                 <hr>
                                 <?php
                                 $sql2 = "SELECT * FROM user WHERE Username = '" . $_SESSION['Username'] . "'";
@@ -99,7 +100,7 @@ if (!isset($_SESSION['Username'])) {
                                     }
                                 }
                                 ?>
-                                <h4>Year Created: </h4>
+                                <h4>Year Created: <?php echo $row['Year'] ?></h4>
                                 <h4>Shop Code: <?php echo $row['ShopCode'] ?></h4>
                                 <a target="_blank" href="../../Cashier/Login.php" class="btn btn-outline-success">Worker's Login</a>
                                 <a class=" btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this Store?')">Delete Store</a>
@@ -116,7 +117,7 @@ if (!isset($_SESSION['Username'])) {
                     ?>
                     <div class='error'>
                         <div class="image">
-                            <img src="../Asset/Lost.svg" class="lost">
+                            <img src="../../Asset/Lost.svg" class="lost">
                         </div>
                         <div class="text">
                             <h1>No shop found</h1>
